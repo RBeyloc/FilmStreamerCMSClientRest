@@ -15,18 +15,20 @@ public class MovieWebController {
 
     @RequestMapping("/movies")
     public String getWeb(Model containerToView) {
-
-        containerToView.addAttribute("allMovies",
-                movieService.getAllMovies().get());
-
+        containerToView.addAttribute("allMovies", movieService.getAllMovies().get());
         return "showMovies";
     }
 
     @RequestMapping("/deleteMovie")
-    public String deleteMovie(@RequestParam long movieId) {
+    public String deleteMovie(@RequestParam long movieId, Model containerToView) {
         movieService.deleteMovieById(movieId);
+        containerToView.addAttribute("allMovies", movieService.getAllMovies().get());
         return "showMovies";
+    }
 
+    @RequestMapping("/newMovieForm")
+    public String newMovieForm(Model containerToView) {
+        return "newMovieForm";
     }
 
 }
