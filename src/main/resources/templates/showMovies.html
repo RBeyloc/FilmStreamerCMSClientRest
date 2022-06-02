@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+
+<body>
+<div class="w3-panel w3-padding-32">
+    <h1>Spring Boot Movies Example .....</h1>
+    <h3>table of movies from @Controller @Service @Repository and H2 DB</h3>
+
+    <table class="w3-table-all w3-hoverable">
+        <tr th:each="movie:${allMovies}">
+
+            <td th:text="${movie.movieId}"></td>
+            <td th:text="${movie.title}"></td>
+
+
+            <td><a th:href="@{/movies/deleteMovie(movieId=${movie.movieId})}"
+                   class="w3-button w3-red"> Delete this movie </a></td>
+
+        </tr>
+    </table>
+
+    <p>
+        <a th:href="@{/movies/newMovie}" class="w3-button w3-blue">Add new movie</a>
+    </p>
+
+</div>
+</body>
+</html>
