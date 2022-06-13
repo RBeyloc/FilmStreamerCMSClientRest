@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
+import java.util.UUID;
 
 @Service
 public class ViewService {
@@ -21,11 +22,11 @@ public class ViewService {
         return Optional.of(viewRepository.save(View));
     }
 
-    public Optional<View> findViewById(Long id){
+    public Optional<View> findViewById(UUID id){
         return viewRepository.findById(id);
     }
 
-    public Optional<View> deleteViewById(Long id){
+    public Optional<View> deleteViewById(UUID id){
         //Find out IF this id-View IS in our DB
         Optional<View> ViewFound = viewRepository.findById(id);
         if(ViewFound.isPresent()) {
@@ -37,7 +38,7 @@ public class ViewService {
     }
 
     public Optional<View> updateView(View View) {
-        Optional<View> ViewFound = viewRepository.findById(View.getViewId());
+        Optional<View> ViewFound = viewRepository.findById(View.getViewUUID());
         if(ViewFound.isPresent()) {
             return Optional.of(viewRepository.save(View));
         } else {

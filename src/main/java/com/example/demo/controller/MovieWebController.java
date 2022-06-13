@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import com.example.demo.model.Movie;
 
+import java.util.UUID;
+
 @Controller
 @RequestMapping("/movies")
 public class MovieWebController {
@@ -21,10 +23,10 @@ public class MovieWebController {
     }
 
     @RequestMapping("/deleteMovie")
-    public String deleteMovie(@RequestParam long movieId, Model containerToView) {
-        movieService.deleteMovieById(movieId);
+    public String deleteMovie(@RequestParam UUID movieUUID, Model containerToView) {
+        movieService.deleteMovieById(movieUUID);
         containerToView.addAttribute("allMovies", movieService.getAllMovies().get());
-        return "showMovies";
+        return "redirect:movies";
     }
 
     @RequestMapping("/newMovieForm")
@@ -43,7 +45,27 @@ public class MovieWebController {
                 directing, casting, synopsis, genre, ageRating, posterPath, videoPath);
         movieService.createMovie(newMovie);
         containerToView.addAttribute("allMovies", movieService.getAllMovies().get());
-        return "showMovies";
+        return "redirect:movies";
+    }
+
+    @RequestMapping("/updateMovieForm")
+    public String updateMovieForm(@RequestParam UUID movieUUID, Model containerToView) {
+        containerToView.addAttribute("movie", movieService.findMovieById(movieUUID).get());
+        return "updateMovieForm";
+    }
+
+    @RequestMapping("/updateMovie")
+    public String updateMovie(@RequestParam String title, @RequestParam String releaseYear,
+                              @RequestParam String duration, @RequestParam String directing,
+                              @RequestParam String casting, @RequestParam String synopsis,
+                              @RequestParam String genre, @RequestParam String ageRating,
+                              @RequestParam String posterPath,  @RequestParam String videoPath,
+                              @RequestParam String movieUUID, Model containerToView) {
+        Movie movie = new Movie(UUID.fromString(movieUUID), title, Integer.valueOf(releaseYear), Integer.valueOf(duration),
+                directing, casting, synopsis, genre, ageRating, posterPath, videoPath);
+        movieService.updateMovie(movie);
+        containerToView.addAttribute("allMovies", movieService.getAllMovies().get());
+        return "redirect:movies";
     }
 
 }

@@ -1,6 +1,7 @@
 package com.example.demo.service;
 
 import java.util.Optional;
+import java.util.UUID;
 
 import com.example.demo.model.Movie;
 import com.example.demo.repository.MovieRepository;
@@ -21,11 +22,11 @@ public class MovieService {
         return Optional.of(movieRepository.save(movie));
     }
 
-    public Optional<Movie> findMovieById(Long id){
+    public Optional<Movie> findMovieById(UUID id){
         return movieRepository.findById(id);
     }
 
-    public Optional<Movie> deleteMovieById(Long id){
+    public Optional<Movie> deleteMovieById(UUID id){
         //Find out IF this id-movie IS in our DB
         Optional<Movie> movieFound = movieRepository.findById(id);
         if(movieFound.isPresent()) {
@@ -37,7 +38,7 @@ public class MovieService {
     }
 
     public Optional<Movie> updateMovie(Movie movie) {
-        Optional<Movie> movieFound = movieRepository.findById(movie.getMovieId());
+        Optional<Movie> movieFound = movieRepository.findById(movie.getMovieUUID());
         if(movieFound.isPresent()) {
             return Optional.of(movieRepository.save(movie));
         } else {

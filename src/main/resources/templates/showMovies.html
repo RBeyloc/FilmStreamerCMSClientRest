@@ -14,14 +14,16 @@
 
     <table class="w3-table-all w3-hoverable">
         <tr th:each="movie:${allMovies}">
-            <td th:text="${movie.movieId}"></td>
+            <td th:text="${movie.movieUUID}"></td>
             <td th:text="${movie.title}"></td>
             <td th:text="${movie.releaseYear}"></td>
             <td th:text="${movie.duration}"></td>
             <td th:text="${movie.directing}"></td>
             <td th:text="${movie.genre}"></td>
-            <td><a th:href="@{/movies/deleteMovie(movieId=${movie.movieId})}"
-                   class="w3-button w3-red"> Delete this movie </a></td>
+            <td><a th:href="@{/movies/deleteMovie(movieUUID=${movie.movieUUID})}"
+                   class="w3-button w3-red">Delete this movie</a></td>
+            <td><a th:href="@{/movies/updateMovieForm(movieUUID=${movie.movieUUID})}"
+                   class="w3-button w3-orange">Update this movie</a></td>
         </tr>
     </table>
     <p>

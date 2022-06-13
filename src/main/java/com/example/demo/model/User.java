@@ -2,12 +2,12 @@ package com.example.demo.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
-import org.springframework.web.bind.annotation.RestController;
-
+import org.hibernate.annotations.GenericGenerator;
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 @Getter @Setter @ToString @EqualsAndHashCode @NoArgsConstructor @AllArgsConstructor
 @Entity(name="User")
@@ -15,9 +15,10 @@ import java.util.List;
 public class User {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "USER_ID")
-    private long userId;
+    @GeneratedValue (generator = "uuid2")
+    @GenericGenerator (name = "uuid2", strategy = "uuid2")
+    @Column (name = "USER_UUID", columnDefinition = "BINARY (16)")
+    private UUID userUUID;
     @Column(name = "USER_EMAIL")
     private String userEmail;
     @JsonIgnore

@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
+import java.util.UUID;
 
 @Service
 public class UserService {
@@ -21,11 +22,11 @@ public class UserService {
         return Optional.of(userRepository.save(user));
     }
 
-    public Optional<User> findUserById(Long id){
+    public Optional<User> findUserById(UUID id){
         return userRepository.findById(id);
     }
 
-    public Optional<User> deleteUserById(Long id){
+    public Optional<User> deleteUserById(UUID id){
         //Find out IF this id-user IS in our DB
         Optional<User> userFound = userRepository.findById(id);
         if(userFound.isPresent()) {
@@ -37,7 +38,7 @@ public class UserService {
     }
 
     public Optional<User> updateUser(User user) {
-        Optional<User> userFound = userRepository.findById(user.getUserId());
+        Optional<User> userFound = userRepository.findById(user.getUserUUID());
         if(userFound.isPresent()) {
             return Optional.of(userRepository.save(user));
         } else {
