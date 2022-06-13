@@ -24,6 +24,8 @@
                    class="w3-button w3-red">Delete this movie</a></td>
             <td><a th:href="@{/movies/updateMovieForm(movieUUID=${movie.movieUUID})}"
                    class="w3-button w3-orange">Update this movie</a></td>
+            <td><a th:href="@{/movies/movieDetails(movieUUID=${movie.movieUUID})}"
+                   class="w3-button w3-green">Movie details</a></td>
         </tr>
     </table>
     <p>

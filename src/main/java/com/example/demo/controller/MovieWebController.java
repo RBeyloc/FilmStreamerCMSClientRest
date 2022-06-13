@@ -35,15 +35,8 @@ public class MovieWebController {
     }
 
     @RequestMapping("/createMovie")
-    public String createMovie(@RequestParam String title, @RequestParam String releaseYear,
-                              @RequestParam String duration, @RequestParam String directing,
-                              @RequestParam String casting, @RequestParam String synopsis,
-                              @RequestParam String genre, @RequestParam String ageRating,
-                              @RequestParam String posterPath,  @RequestParam String videoPath,
-                              Model containerToView) {
-        Movie newMovie = new Movie(title, Integer.valueOf(releaseYear), Integer.valueOf(duration),
-                directing, casting, synopsis, genre, ageRating, posterPath, videoPath);
-        movieService.createMovie(newMovie);
+    public String createMovie(Movie movie, Model containerToView) {
+        movieService.createMovie(movie);
         containerToView.addAttribute("allMovies", movieService.getAllMovies().get());
         return "redirect:movies";
     }
@@ -55,17 +48,16 @@ public class MovieWebController {
     }
 
     @RequestMapping("/updateMovie")
-    public String updateMovie(@RequestParam String title, @RequestParam String releaseYear,
-                              @RequestParam String duration, @RequestParam String directing,
-                              @RequestParam String casting, @RequestParam String synopsis,
-                              @RequestParam String genre, @RequestParam String ageRating,
-                              @RequestParam String posterPath,  @RequestParam String videoPath,
-                              @RequestParam String movieUUID, Model containerToView) {
-        Movie movie = new Movie(UUID.fromString(movieUUID), title, Integer.valueOf(releaseYear), Integer.valueOf(duration),
-                directing, casting, synopsis, genre, ageRating, posterPath, videoPath);
+    public String updateMovie(Movie movie, Model containerToView) {
         movieService.updateMovie(movie);
         containerToView.addAttribute("allMovies", movieService.getAllMovies().get());
         return "redirect:movies";
+    }
+
+    @RequestMapping("/movieDetails")
+    public String movieDetails(@RequestParam UUID movieUUID, Model containerToView) {
+        containerToView.addAttribute("movie", movieService.findMovieById(movieUUID).get());
+        return "movieDetails";
     }
 
 }
