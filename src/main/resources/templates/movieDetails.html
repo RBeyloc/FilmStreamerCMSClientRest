@@ -10,21 +10,32 @@
 </head>
 <body>
 
-<div class="w3-panel w3-padding-32">
-    <h2 th:text="${movie.title}"></h2>
+<div class="w3-container">
 
     <div class="w3-card-4" style="width:70%">
         <header class="w3-container w3-light-grey">
+            <h2 th:text="${movie.title}"></h2>
             <h3 th:text="${movie.movieUUID}"></h3>
         </header>
         <div class="w3-container">
-            <p th:text="${movie.directing}"></p>
+            <p>Direction: <span th:text="${movie.directing}"></span></p>
             <hr/>
-            <p th:text="${movie.casting}"></p>
+            <p>Casting: <span th:text="${movie.casting}"></span> </p>
             <hr/>
-            <img th:src="${movie.posterPath}" th:alt="${movie.title}" class="w3-left w3-circle w3-margin-right" style="width:60px">
+            <p>Release year:
+                <span th:text="${movie.releaseYear}"></span> /
+                Movie duration:
+                <span th:text="${movie.duration}"></span> /
+                minutes
+                Genre:
+                <span th:text="${movie.genre}"></span> /
+                Age rating:
+                <span th:text="${movie.ageRating}"></span>
+            </p>
+            <hr/>
+            <img th:src="@{/images/{path}(path=${movie.posterPath})}" th:alt="${movie.title}" class="w3-left w3-margin-right" style="width:25%">
             <p th:text="${movie.synopsis}"></p>
-            <br/>
+            <hr/>
             <a th:href="@{/movies/movies}" class="w3-button w3-green">Back to movies list</a>
         </div>
         <br/>
