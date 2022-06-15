@@ -21,7 +21,7 @@
             <td th:text="${movie.directing}"></td>
             <td th:text="${movie.genre}"></td>
 
-            <td><button th:id-movie="${movie.movieUUID}" th:onclick="deleteMovie(this.getAttribute('id-movie'))" class="w3-button w3-red">Delete this movie</button></td>
+            <td><button th:id-movie="${movie.movieUUID}" th:onclick="deleteMovieAskForConfirmation(this.getAttribute('id-movie'))" class="w3-button w3-red">Delete this movie</button></td>
             <td><a th:href="@{/movies/updateMovieForm(movieUUID=${movie.movieUUID})}"
                    class="w3-button w3-orange">Update this movie</a></td>
             <td><a th:href="@{/movies/movieDetails(movieUUID=${movie.movieUUID})}"
@@ -29,17 +29,17 @@
         </tr>
     </table>
 </div>
-<!-- Trigger/Open the Modal -->
-<button onclick="document.getElementById('id01').style.display='block'"
-        class="w3-button">Open Modal</button>
 
 <!-- The Modal -->
 <div id="id01" class="w3-modal">
     <div class="w3-modal-content">
         <div class="w3-container">
-      <span onclick="document.getElementById('id01').style.display='none'"
+            <span onclick="document.getElementById('id01').style.display='none'"
             class="w3-button w3-display-topright">&times;</span>
             <p id="message"></p>
+            <button id="confirm" class="w3-button w3-green">Confirm</button>
+            <button id="deny" class="w3-button w3-red" onclick="document.getElementById('id01').style.display='none'; ">Close</button>
+            <br/><br/>
         </div>
     </div>
 </div>
