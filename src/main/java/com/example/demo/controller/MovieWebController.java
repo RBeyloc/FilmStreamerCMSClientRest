@@ -3,6 +3,7 @@ package com.example.demo.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import com.example.demo.model.Movie;
@@ -23,10 +24,14 @@ public class MovieWebController {
     }
 
     @RequestMapping("/deleteMovie")
-    public String deleteMovie(@RequestParam UUID movieUUID, Model containerToView) {
-        movieService.deleteMovieById(movieUUID);
-        containerToView.addAttribute("allMovies", movieService.getAllMovies().get());
-        return "redirect:movies";
+    public String deleteMovie(@RequestParam String movieUUID, Model containerToView) {
+        if(movieService.findMovieById(UUID.fromString(movieUUID)).isPresent()) {
+            movieService.deleteMovieById(UUID.fromString(movieUUID));
+            //containerToView.addAttribute("allMovies", movieService.getAllMovies().get());
+            return "redirect:movies";
+        } else {
+            return "error";
+        }
     }
 
     @RequestMapping("/newMovieForm")

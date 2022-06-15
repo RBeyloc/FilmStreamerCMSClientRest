@@ -9,9 +9,9 @@
 </head>
 <body>
 <div class="w3-panel w3-padding-32">
-    <h1>Spring Boot Movies Example .....</h1>
-    <h3>table of movies from @Controller @Service @Repository and H2 DB</h3>
-
+    <p>
+        <a th:href="@{/movies/newMovieForm}" class="w3-button w3-green">Add new movie</a>
+    </p>
     <table class="w3-table-all w3-hoverable">
         <tr th:each="movie:${allMovies}">
             <td th:text="${movie.movieUUID}"></td>
@@ -20,17 +20,31 @@
             <td th:text="${movie.duration}"></td>
             <td th:text="${movie.directing}"></td>
             <td th:text="${movie.genre}"></td>
-            <td><a th:href="@{/movies/deleteMovie(movieUUID=${movie.movieUUID})}"
-                   class="w3-button w3-red">Delete this movie</a></td>
+
+            <td><button th:id-movie="${movie.movieUUID}" th:onclick="deleteMovie(this.getAttribute('id-movie'))" class="w3-button w3-red">Delete this movie</button></td>
             <td><a th:href="@{/movies/updateMovieForm(movieUUID=${movie.movieUUID})}"
                    class="w3-button w3-orange">Update this movie</a></td>
             <td><a th:href="@{/movies/movieDetails(movieUUID=${movie.movieUUID})}"
                    class="w3-button w3-green">Movie details</a></td>
         </tr>
     </table>
-    <p>
-        <a th:href="@{/movies/newMovieForm}" class="w3-button w3-green">Add new movie</a>
-    </p>
 </div>
+<!-- Trigger/Open the Modal -->
+<button onclick="document.getElementById('id01').style.display='block'"
+        class="w3-button">Open Modal</button>
+
+<!-- The Modal -->
+<div id="id01" class="w3-modal">
+    <div class="w3-modal-content">
+        <div class="w3-container">
+      <span onclick="document.getElementById('id01').style.display='none'"
+            class="w3-button w3-display-topright">&times;</span>
+            <p id="message"></p>
+        </div>
+    </div>
+</div>
+
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script src="/js/scratch.js"></script>
 </body>
 </html>
