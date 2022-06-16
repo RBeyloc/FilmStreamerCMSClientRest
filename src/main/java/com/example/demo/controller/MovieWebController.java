@@ -23,16 +23,6 @@ public class MovieWebController {
         return "showMovies";
     }
 
-    @RequestMapping("/deleteMovie")
-    public String deleteMovie(@RequestParam String movieUUID, Model containerToView) {
-        if(movieService.findMovieById(UUID.fromString(movieUUID)).isPresent()) {
-            movieService.deleteMovieById(UUID.fromString(movieUUID));
-            //containerToView.addAttribute("allMovies", movieService.getAllMovies().get());
-            return "redirect:movies";
-        } else {
-            return "error";
-        }
-    }
 
     @RequestMapping("/newMovieForm")
     public String newMovieForm(Model containerToView) {
