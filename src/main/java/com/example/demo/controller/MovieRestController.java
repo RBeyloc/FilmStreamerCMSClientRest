@@ -36,7 +36,7 @@ public class MovieRestController {
     }
 
         //CRUD: create movie
-        @PostMapping(path = "/addMovie", consumes = "application/JSON")
+       /* @PostMapping(path = "/addMovie", consumes = "application/JSON")
         public ResponseEntity<Movie> addMovie(@RequestBody Movie movie) {
             Optional<Movie> movieCreated = movieservice.createMovie(movie);
 
@@ -178,5 +178,5 @@ public class MovieRestController {
                 headers.add("operationStatus", "not Found");
                 return ResponseEntity.accepted().headers(headers).body(null);
             }
-        }
+        }*/
 }

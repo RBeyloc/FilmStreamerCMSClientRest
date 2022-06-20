@@ -1,28 +1,37 @@
 package com.example.demo.service;
 
+import java.lang.reflect.Type;
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
 import com.example.demo.model.Movie;
-import com.example.demo.repository.MovieRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
 
 @Service
 public class MovieService {
 
-    @Autowired
-    MovieRepository movieRepository;
+    RestTemplate restTemplate = new RestTemplate();
 
     public Optional<Iterable<Movie>> getAllMovies() {
-        return Optional.of(movieRepository.findAll());
+        ResponseEntity<List<Movie>> response = restTemplate.exchange("http://localhost:8083/api/movies/movies",
+                HttpMethod.GET, null, new ParameterizedTypeReference<List<Movie>>() {});
+        List<Movie> movies = response.getBody();
+        return Optional.of(movies);
     }
 
     public Optional<Movie> createMovie(Movie movie){
-        return Optional.of(movieRepository.save(movie));
+        ResponseEntity<Movie> response = restTemplate.exchange("http://localhost:8083/api/movies/addMovie",
+                HttpMethod.POST, null, new ParameterizedTypeReference<Movie>() {}, movie);
+        Movie newMovie = response.getBody();
+        return Optional.of(newMovie);
     }
 
-    public Optional<Movie> findMovieById(UUID id){
+    /*public Optional<Movie> findMovieById(UUID id){
         return movieRepository.findById(id);
     }
 
@@ -56,6 +65,6 @@ public class MovieService {
 
     public int count() {
         return (int) movieRepository.count();
-    }
+    }*/
 
 }

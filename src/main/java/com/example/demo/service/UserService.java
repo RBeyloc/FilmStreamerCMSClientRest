@@ -22,11 +22,11 @@ public class UserService {
         return Optional.of(userRepository.save(user));
     }
 
-    public Optional<User> findUserById(UUID id){
+    public Optional<User> findUserById(String id){
         return userRepository.findById(id);
     }
 
-    public Optional<User> deleteUserById(UUID id){
+    public Optional<User> deleteUserById(String id){
         //Find out IF this id-user IS in our DB
         Optional<User> userFound = userRepository.findById(id);
         if(userFound.isPresent()) {
@@ -44,10 +44,6 @@ public class UserService {
         } else {
             return null;
         }
-    }
-
-    public Optional<Iterable<User>> findUsersByUserEmail(String userEmail){
-        return userRepository.findUsersByUserEmail(userEmail);
     }
 
     public int count() {

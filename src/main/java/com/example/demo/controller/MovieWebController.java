@@ -3,9 +3,7 @@ package com.example.demo.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import com.example.demo.model.Movie;
 
 import java.util.UUID;
@@ -23,7 +21,6 @@ public class MovieWebController {
         return "showMovies";
     }
 
-
     @RequestMapping("/newMovieForm")
     public String newMovieForm(Model containerToView) {
         return "newMovieForm";
@@ -32,11 +29,10 @@ public class MovieWebController {
     @RequestMapping("/createMovie")
     public String createMovie(Movie movie, Model containerToView) {
         movieService.createMovie(movie);
-        containerToView.addAttribute("allMovies", movieService.getAllMovies().get());
         return "redirect:movies";
     }
 
-    @RequestMapping("/updateMovieForm")
+    /*@RequestMapping("/updateMovieForm")
     public String updateMovieForm(@RequestParam UUID movieUUID, Model containerToView) {
         containerToView.addAttribute("movie", movieService.findMovieById(movieUUID).get());
         return "updateMovieForm";
@@ -53,6 +49,6 @@ public class MovieWebController {
     public String movieDetails(@RequestParam UUID movieUUID, Model containerToView) {
         containerToView.addAttribute("movie", movieService.findMovieById(movieUUID).get());
         return "movieDetails";
-    }
+    }*/
 
 }
