@@ -26,29 +26,16 @@ public class MovieWebController {
         return "newMovieForm";
     }
 
-    @RequestMapping("/createMovie")
+    /*@RequestMapping("/createMovie")
     public String createMovie(Movie movie, Model containerToView) {
         movieService.createMovie(movie);
         return "redirect:movies";
-    }
-
-    /*@RequestMapping("/updateMovieForm")
-    public String updateMovieForm(@RequestParam UUID movieUUID, Model containerToView) {
-        containerToView.addAttribute("movie", movieService.findMovieById(movieUUID).get());
-        return "updateMovieForm";
-    }
-
-    @RequestMapping("/updateMovie")
-    public String updateMovie(Movie movie, Model containerToView) {
-        movieService.updateMovie(movie);
-        containerToView.addAttribute("allMovies", movieService.getAllMovies().get());
-        return "redirect:movies";
-    }
+    }*/
 
     @RequestMapping("/movieDetails")
     public String movieDetails(@RequestParam UUID movieUUID, Model containerToView) {
         containerToView.addAttribute("movie", movieService.findMovieById(movieUUID).get());
         return "movieDetails";
-    }*/
+    }
 
 }

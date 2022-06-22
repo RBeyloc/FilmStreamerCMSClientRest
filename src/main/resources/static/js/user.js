@@ -1,0 +1,21 @@
+function deleteUserAskForConfirmation(userUUID) {
+        document.getElementById('message').textContent = 'Are you sure to proceed with the deletion of user with UUID ' + userUUID + '?';
+        document.getElementById('id01').style.display='block';
+        document.getElementById('confirm').onclick = function(){ document.getElementById('id01').style.display='none'; deleteUserConfirmed(userUUID); };
+}
+
+function deleteUserConfirmed(userUUID) {
+    axios.delete('http://localhost:8086/api/users/deleteUser', {
+    params: { userId: userUUID }
+    })
+    .then(function (response) {
+        document.getElementById('message').textContent = 'Action successfully done. Deleted user: ' + response.data.title + ', with UUID ' + response.data.userUUID;
+        document.getElementById('id01').style.display='block';
+        document.getElementById('confirm').onclick = function(){ document.getElementById('id01').style.display='none'; location.replace('http://localhost:8086/users/users');};
+    })
+    .catch(function (error) {
+        document.getElementById('message').textContent = 'Object not found!';
+        document.getElementById('id01').style.display='block';
+        document.getElementById('confirm').onclick = function(){ document.getElementById('id01').style.display='none'; location.replace('http://localhost:8086/users/users');};
+    });
+  }
