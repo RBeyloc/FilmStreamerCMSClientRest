@@ -39,11 +39,11 @@ public class MovieService {
         return Optional.of(movie);
     }
 
-   /* public Optional<Movie> createMovie(Movie movie){
+   public Optional<Movie> createMovie(Movie movie){
         ResponseEntity<Movie> response = restTemplate.exchange("http://localhost:8083/api/movies/addMovie",
                 HttpMethod.POST, null, new ParameterizedTypeReference<Movie>() {}, movie);
         Movie newMovie = response.getBody();
         return Optional.of(newMovie);
-    }*/
+    }
 
 }
