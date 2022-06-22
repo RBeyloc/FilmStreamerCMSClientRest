@@ -5,27 +5,27 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <script src="https://kit.fontawesome.com/ed663e4c4c.js" crossorigin="anonymous"></script>
-    <title>Movies List</title>
+    <title>Users List</title>
 </head>
 <body>
 <div class="w3-container w3-display-topmiddle">
     <p>
-        <a th:href="@{/movies/newMovieForm}" class="w3-button w3-green">Add new movie</a>
+        <a th:href="@{/users/newUserForm}" class="w3-button w3-green">Add new user</a>
     </p>
     <table class="w3-table-all w3-hoverable">
-        <tr th:each="movie:${allMovies}">
-            <td th:text="${movie.movieUUID}"></td>
-            <td th:text="${movie.title}"></td>
-            <td th:text="${movie.releaseYear}"></td>
-            <td th:text="${movie.duration}"></td>
-            <td th:text="${movie.directing}"></td>
-            <td th:text="${movie.genre}"></td>
+        <tr th:each="user:${allUsers}">
+            <td th:text="${user.userUUID}"></td>
+            <td th:text="${user.userFirstName}"></td>
+            <td th:text="${user.userLastName}"></td>
+            <td th:text="${user.userEmail}"></td>
+            <td th:text="${user.userRol}"></td>
+            <td th:text="${user.birthDate}"></td>
 
-            <td><button th:id-movie="${movie.movieUUID}" th:onclick="deleteMovieAskForConfirmation(this.getAttribute('id-movie'))" class="w3-button w3-red">Delete this movie</button></td>
-            <td><a th:href="@{/movies/updateMovieForm(movieUUID=${movie.movieUUID})}"
-                   class="w3-button w3-orange">Update this movie</a></td>
-            <td><a th:href="@{/movies/movieDetails(movieUUID=${movie.movieUUID})}"
-                   class="w3-button w3-green">Movie details</a></td>
+            <td><button th:id-user="${user.userUUID}" th:onclick="deleteUserAskForConfirmation(this.getAttribute('id-user'))" class="w3-button w3-red">Delete this user</button></td>
+            <td><a th:href="@{/users/updateUserForm(userUUID=${user.userUUID})}"
+                   class="w3-button w3-orange">Update this user</a></td>
+            <td><a th:href="@{/users/userDetails(userUUID=${user.userUUID})}"
+                   class="w3-button w3-green">User details</a></td>
         </tr>
     </table>
 </div>
@@ -45,6 +45,6 @@
 </div>
 
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-<script src="/js/movie.js"></script>
+<script src="/js/user.js"></script>
 </body>
 </html>

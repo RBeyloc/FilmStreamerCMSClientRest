@@ -2,6 +2,7 @@ package com.example.demo.service;
 
 import java.lang.reflect.Type;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -24,47 +25,25 @@ public class MovieService {
         return Optional.of(movies);
     }
 
-    public Optional<Movie> createMovie(Movie movie){
+    public Optional<Movie> findMovieById(UUID movieUUID) {
+        ResponseEntity<Movie> response = restTemplate.exchange("http://localhost:8083/api/movies/getMovie/" + movieUUID,
+                HttpMethod.GET, null, new ParameterizedTypeReference<Movie>() {});
+        Movie movie = response.getBody();
+        return Optional.of(movie);
+    }
+
+    public Optional<Movie> deleteMovieById(UUID movieUUID) {
+        ResponseEntity<Movie> response = restTemplate.exchange("http://localhost:8083/api/movies/deleteMovie/" + movieUUID,
+                HttpMethod.DELETE, null, new ParameterizedTypeReference<Movie>() {});
+        Movie movie = response.getBody();
+        return Optional.of(movie);
+    }
+
+   /* public Optional<Movie> createMovie(Movie movie){
         ResponseEntity<Movie> response = restTemplate.exchange("http://localhost:8083/api/movies/addMovie",
                 HttpMethod.POST, null, new ParameterizedTypeReference<Movie>() {}, movie);
         Movie newMovie = response.getBody();
         return Optional.of(newMovie);
-    }
-
-    /*public Optional<Movie> findMovieById(UUID id){
-        return movieRepository.findById(id);
-    }
-
-    public Optional<Movie> deleteMovieById(UUID id){
-        //Find out IF this id-movie IS in our DB
-        Optional<Movie> movieFound = movieRepository.findById(id);
-        if(movieFound.isPresent()) {
-            movieRepository.deleteById(id);
-            return Optional.of(movieFound.get());
-        } else {
-            return null;
-        }
-    }
-
-    public Optional<Movie> updateMovie(Movie movie) {
-        Optional<Movie> movieFound = movieRepository.findById(movie.getMovieUUID());
-        if(movieFound.isPresent()) {
-            return Optional.of(movieRepository.save(movie));
-        } else {
-            return null;
-        }
-    }
-
-    public Optional<Iterable<Movie>> findMoviesByTitle(String title){
-        return movieRepository.findMoviesByTitle(title);
-    }
-
-    public Optional<Movie> deleteMovieByTitle(String title){
-        return movieRepository.deleteMovieByTitle(title);
-    }
-
-    public int count() {
-        return (int) movieRepository.count();
     }*/
 
 }
