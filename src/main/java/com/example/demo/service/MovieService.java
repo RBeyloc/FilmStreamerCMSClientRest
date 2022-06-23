@@ -39,10 +39,8 @@ public class MovieService {
     }
 
     public Optional<Movie> createMovie(Movie movie) {
-
         String url = "http://localhost:8083/api/movies/createMovie";
         RestTemplate restTemplate = new RestTemplate();
-
 
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
@@ -56,14 +54,18 @@ public class MovieService {
         return Optional.of(newMovie);
     }
 
-
-
-
-
     public Optional<Movie> updateMovie(Movie movie) {
-        ResponseEntity<Movie> response = restTemplate.exchange("http://localhost:8083/api/movies/updateMovie",
-                HttpMethod.POST, null, new ParameterizedTypeReference<Movie>() {
-                }, movie);
+        String url = "http://localhost:8083/api/movies/updateMovie";
+        RestTemplate restTemplate = new RestTemplate();
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        headers.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
+
+        HttpEntity<Movie> request = new HttpEntity<>(movie, headers);
+
+        ResponseEntity<Movie> response = restTemplate.postForEntity(url, request, Movie.class);
+
         Movie newMovie = response.getBody();
         return Optional.of(newMovie);
     }

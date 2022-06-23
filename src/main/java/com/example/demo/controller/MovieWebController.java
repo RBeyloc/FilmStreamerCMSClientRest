@@ -48,9 +48,8 @@ public class MovieWebController {
         return "updateMovieForm";
     }
 
-    //CRUD: update movie
-    @PostMapping(value = "/updateMovie", consumes = "application/json", produces = "application/json")
-    public ResponseEntity<Movie> updateMovie(@RequestBody Movie movie) {
+    @RequestMapping(path="/updateMovie", consumes = "application/json", produces = "application/json")
+    public ResponseEntity<Movie> updateMovie(Movie movie, Model containerToView) {
         Optional<Movie> movieFound = movieService.findMovieById(movie.getMovieUUID());
         Optional<Movie> movieUpdate = movieFound;
 
