@@ -1,12 +1,14 @@
 package com.example.demo.model;
 
 import lombok.*;
+
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
 @Getter @Setter @ToString @EqualsAndHashCode @NoArgsConstructor @AllArgsConstructor
-public class Movie {
+public class Movie implements Serializable {
 
     private UUID movieUUID;
     private String title;
