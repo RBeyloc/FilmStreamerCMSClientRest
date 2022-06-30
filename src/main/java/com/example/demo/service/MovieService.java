@@ -44,7 +44,7 @@ public class MovieService {
 
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
-        headers.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
+        headers.setAccept(Collections.singletonList(MediaType.ALL));
 
         HttpEntity<Movie> request = new HttpEntity<>(movie, headers);
 
@@ -55,19 +55,23 @@ public class MovieService {
     }
 
     public Optional<Movie> updateMovie(Movie movie) {
-        String url = "http://localhost:8083/api/movies/updateMovie";
-        RestTemplate restTemplate = new RestTemplate();
+        Optional<Movie> movieFound = findMovieById(movie.getMovieUUID());
+        if (movieFound.isPresent()) {
+            String url = "http://localhost:8083/api/movies/updateMovie";
+            RestTemplate restTemplate = new RestTemplate();
 
-        HttpHeaders headers = new HttpHeaders();
-        headers.setContentType(MediaType.APPLICATION_JSON);
-        headers.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
+            HttpHeaders headers = new HttpHeaders();
+            headers.setContentType(MediaType.APPLICATION_JSON);
+            headers.setAccept(Collections.singletonList(MediaType.ALL));
 
-        HttpEntity<Movie> request = new HttpEntity<>(movie, headers);
+            HttpEntity<Movie> request = new HttpEntity<>(movie, headers);
 
-        ResponseEntity<Movie> response = restTemplate.postForEntity(url, request, Movie.class);
+            ResponseEntity<Movie> response = restTemplate.postForEntity(url, request, Movie.class);
 
-        Movie newMovie = response.getBody();
-        return Optional.of(newMovie);
+            Movie newMovie = response.getBody();
+            return Optional.of(newMovie);
+        }
+        return null;
     }
 
 }
