@@ -37,6 +37,14 @@
             <img th:src="@{/images/{path}(path=${movie.posterPath})}" th:alt="${movie.title}" class="w3-left w3-margin-right" style="width:25%">
             <p th:text="${movie.synopsis}"></p>
 
+            <br/>
+            <hr/>
+            <br/>
+            <video controls="controls" poster="image" preload="true">
+                <source th:src="@{http://localhost:8083/api/videos/video/{path}(path=${movie.videoPath})}" type="video/mp4" >
+            </video>
+            <hr/>
+            <a th:href="@{/movies/movies}" class="w3-button w3-green">Back to movies list</a>
         </div>
         <br/>
     </div>
