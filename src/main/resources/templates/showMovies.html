@@ -8,34 +8,44 @@
     <title>Movie streamer - movies list</title>
 </head>
 <body>
-<div class="w3-container w3-display-topmiddle">
-    <p>
-        <a th:href="@{/movies/newMovieForm}" class="w3-button w3-green">Add new movie</a>
-    </p>
-    <table class="w3-table-all w3-hoverable">
-        <tr th:each="movie:${allMovies}">
-            <td th:text="${movie.movieUUID}"></td>
-            <td th:text="${movie.title}"></td>
-            <td th:text="${movie.releaseYear}"></td>
-            <td th:text="${movie.duration}"></td>
-            <td th:text="${movie.directing}"></td>
-            <td th:text="${movie.genre}"></td>
+<nav class="w3-bar w3-border w3-black">
+    <a href="#" class="w3-bar-item w3-button w3-hover-none w3-text-grey w3-hover-text-white">Home</a>
+    <a href="#" class="w3-bar-item w3-button w3-hover-none w3-text-grey w3-hover-text-white">Users</a>
+    <a href="#" class="w3-bar-item w3-button w3-hover-none w3-text-white w3-hover-text-white">Movies</a>
+    <a th:href="@{/movies/newMovieForm}" class="w3-bar-item w3-button w3-hover-none w3-text-grey w3-hover-text-white w3-right">Add new movie</a>
 
-            <td><button th:id-movie="${movie.movieUUID}" th:onclick="deleteMovieAskForConfirmation(this.getAttribute('id-movie'))" class="w3-button w3-red">Delete this movie</button></td>
-            <td><a th:href="@{/movies/updateMovieForm(movieUUID=${movie.movieUUID})}"
-                   class="w3-button w3-orange">Update this movie</a></td>
-            <td><a th:href="@{/movies/movieDetails(movieUUID=${movie.movieUUID})}"
-                   class="w3-button w3-green">Movie details</a></td>
-        </tr>
-    </table>
-</div>
+</nav>
+<main class="w3-container w3-center">
+    <div class="w3-center">
+        <h3>List of Movies</h3>
+    </div>
+
+    <div class="w3-row-padding w3-center w3-container w3-margin">
+        <div class="w3-col l3 m4 s6 w3-padding-16" th:each="movie:${allMovies}">
+            <div class="w3-card-4 w3-light-grey" >
+                <div class="w3-container w3-center">
+                    <h3 style="height:100px" th:text="${movie.title}"}></h3>
+                    <div style="width:100%; height:300px;">
+                        <img th:src="@{/images/{path}(path=${movie.posterPath})}"  style="max-width:100%; max-height:300px;">
+                    </div>
+                    <h5 th:text="${movie.directing}"}></h5>
+                    <div class="w3-padding-16">
+                        <a th:href="@{/movies/updateMovieForm(movieUUID=${movie.movieUUID})}" class="w3-mobile w3-button w3-gray">Update</a>
+                        <button th:id-movie="${movie.movieUUID}" th:onclick="deleteMovieAskForConfirmation(this.getAttribute('id-movie'))" class="w3-mobile w3-button w3-red">Delete</button>
+                    </div>
+                </div>
+                <a th:href="@{/movies/movieDetails(movieUUID=${movie.movieUUID})}" class="w3-button w3-block w3-black">Details</a>
+            </div>
+        </div>
+    </div>
+</main>
 
 <!-- The Modal -->
 <div id="id01" class="w3-modal">
     <div class="w3-modal-content">
         <div class="w3-container">
             <span onclick="document.getElementById('id01').style.display='none'"
-            class="w3-button w3-display-topright">&times;</span>
+                  class="w3-button w3-display-topright">&times;</span>
             <p id="message"></p>
             <button id="confirm" class="w3-button w3-green">Confirm</button>
             <button id="deny" class="w3-button w3-red" onclick="document.getElementById('id01').style.display='none'; ">Close</button>
@@ -47,4 +57,3 @@
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <script src="/js/movie.js"></script>
 </body>
-</html>
