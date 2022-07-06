@@ -1,52 +1,56 @@
 package com.example.demo.service;
 
-import com.example.demo.model.User;
-import com.example.demo.repository.UserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import java.util.*;
 
-import java.util.Optional;
+import com.example.demo.model.User;
+import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.http.*;
+import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
 
 @Service
 public class UserService {
 
-    @Autowired
-    UserRepository userRepository;
+    RestTemplate restTemplate = new RestTemplate();
 
     public Optional<Iterable<User>> getAllUsers() {
-        return Optional.of(userRepository.findAll());
+        ResponseEntity<List<User>> response = restTemplate.exchange("http://localhost:8083/api/users/users",
+                HttpMethod.GET, null, new ParameterizedTypeReference<List<User>>() {
+                });
+        List<User> users = response.getBody();
+        return Optional.of(users);
     }
 
-    public Optional<User> createUser(User user){
-        return Optional.of(userRepository.save(user));
+    public Optional<User> findUserById(UUID userUUID) {
+        ResponseEntity<User> response = restTemplate.exchange("http://localhost:8083/api/users/getUser/" + userUUID,
+                HttpMethod.GET, null, new ParameterizedTypeReference<User>() {
+                });
+        User user = response.getBody();
+        return Optional.of(user);
     }
 
-    public Optional<User> findUserById(String id){
-        return userRepository.findById(id);
+    public Optional<User> deleteUserById(UUID userUUID) {
+        ResponseEntity<User> response = restTemplate.exchange("http://localhost:8083/api/users/deleteUser/" + userUUID,
+                HttpMethod.DELETE, null, new ParameterizedTypeReference<User>() {
+                });
+        User user = response.getBody();
+        return Optional.of(user);
     }
 
-    public Optional<User> deleteUserById(String id){
-        //Find out IF this id-user IS in our DB
-        Optional<User> userFound = userRepository.findById(id);
-        if(userFound.isPresent()) {
-            userRepository.deleteById(id);
-            return Optional.of(userFound.get());
-        } else {
-            return null;
-        }
-    }
+    public Optional<User> createUser(User user) {
+        String url = "http://localhost:8083/api/users/addUser";
+        RestTemplate restTemplate = new RestTemplate();
 
-    public Optional<User> updateUser(User user) {
-        Optional<User> userFound = userRepository.findById(user.getUserUUID());
-        if(userFound.isPresent()) {
-            return Optional.of(userRepository.save(user));
-        } else {
-            return null;
-        }
-    }
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        headers.setAccept(Collections.singletonList(MediaType.ALL));
 
-    public int count() {
-        return (int) userRepository.count();
+        HttpEntity<User> request = new HttpEntity<>(user, headers);
+
+        ResponseEntity<User> response = restTemplate.postForEntity(url, request, User.class);
+
+        User newUser = response.getBody();
+        return Optional.of(newUser);
     }
 
 }

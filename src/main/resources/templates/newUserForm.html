@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://kit.fontawesome.com/ed663e4c4c.js" crossorigin="anonymous"></script>
+    <title>Movie streamer - new user form</title>
+</head>
+<body>
+<form action="/users/createUser" method="post" class="w3-container w3-card-4 w3-light-grey w3-text-dark-gray w3-margin">
+    <h2 class="w3-center">New User Form</h2>
+
+    <div class="w3-row w3-section">
+        <div class="w3-col" style="width:50px"><i class="w3-xxlarge fa-solid fa-film"></i></div>
+        <div class="w3-rest">
+            <input class="w3-input w3-border" name="userEmail" type="email" placeholder="Email">
+        </div>
+    </div>
+
+    <div class="w3-row w3-section">
+        <div class="w3-col" style="width:50px"><i class="w3-xxlarge fa-solid fa-calendar"></i></div>
+        <div class="w3-rest">
+            <input class="w3-input w3-border" name="userFirstName" type="text" placeholder="First Name">
+        </div>
+    </div>
+
+    <div class="w3-row w3-section">
+        <div class="w3-col" style="width:50px"><i class="w3-xxlarge fa-solid fa-clock"></i></div>
+        <div class="w3-rest">
+            <input class="w3-input w3-border" name="userLastName" type="text" placeholder="Last Name">
+        </div>
+    </div>
+
+    <div class="w3-row w3-section">
+        <div class="w3-col" style="width:50px"><i class="w3-xxlarge fa-solid fa-clapperboard"></i></div>
+        <div class="w3-rest">
+            <input class="w3-input w3-border" name="birthDate" type="date" placeholder="Birthdate">
+        </div>
+    </div>
+
+    <div class="w3-row w3-section">
+        <div class="w3-col" style="width:50px"><i class="w3-xxlarge fa-solid fa-people-group"></i></div>
+        <div class="w3-rest">
+            <input class="w3-input w3-border" name="userRol" type="text" placeholder="Rol">
+        </div>
+    </div>
+
+    <div class="w3-row w3-section">
+        <div class="w3-col" style="width:50px"><i class="w3-xxlarge fa-solid fa-people-group"></i></div>
+        <div class="w3-rest">
+            <input class="w3-input w3-border" name="password" type="text" placeholder="Access Password">
+        </div>
+    </div>
+
+    <button class="w3-button w3-dark-gray w3-ripple w3-padding w3-margin">Create</button>
+    <a th:href="@{/users/users}" class="w3-button w3-red w3-margin">Cancel</a>
+
+</form>
+</body>
