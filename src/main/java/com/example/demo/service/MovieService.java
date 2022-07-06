@@ -1,6 +1,5 @@
 package com.example.demo.service;
 
-import java.lang.reflect.Type;
 import java.util.*;
 
 import com.example.demo.model.Movie;
