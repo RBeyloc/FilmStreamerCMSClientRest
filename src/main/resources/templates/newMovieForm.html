@@ -9,7 +9,7 @@
     <title>Movie streamer - new movie form</title>
 </head>
 <body>
-    <form action="/movies/createMovie" method="post" class="w3-container w3-card-4 w3-light-grey w3-text-dark-gray w3-margin">
+    <form action="/movies/createMovie" method="post" class="w3-container w3-card-4 w3-light-grey w3-text-dark-gray w3-margin" enctype=”multipart/form-data” >
         <h2 class="w3-center">New Movie Form</h2>
 
         <div class="w3-row w3-section">
@@ -72,6 +72,13 @@
             <div class="w3-col" style="width:50px"><i class="w3-xxlarge fa-solid fa-image"></i></div>
             <div class="w3-rest">
                 <input class="w3-input w3-border" name="posterPath" type="text" placeholder="Poster image filename">
+            </div>
+        </div>
+
+        <div class="w3-row w3-section">
+            <div class="w3-col" style="width:50px"><i class="w3-xxlarge fa-solid fa-image"></i></div>
+            <div class="w3-rest">
+                <input class="w3-input w3-border" name="image" type="file" accept="image/png, image/jpeg">
             </div>
         </div>
 
