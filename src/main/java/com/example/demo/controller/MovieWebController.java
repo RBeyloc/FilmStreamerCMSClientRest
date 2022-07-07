@@ -1,14 +1,19 @@
 package com.example.demo.controller;
 
+import com.example.demo.utils.FileUploadUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 import com.example.demo.model.Movie;
 
+import java.io.IOException;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -27,13 +32,20 @@ public class MovieWebController {
 
     @RequestMapping("/newMovieForm")
     public String newMovieForm(Model containerToView) {
+        containerToView.addAttribute("movie", new Movie());
         return "newMovieForm";
     }
 
     @RequestMapping("/createMovie")
-    public String createMovie(Movie movie, Model containerToView) {
-        movieService.createMovie(movie);
-        return "redirect:movies";
+    public String createMovie(Movie movie, MultipartFile file) throws IOException {
+
+        String fileName = StringUtils.cleanPath(movie.getTitle() + file.getOriginalFilename());
+        movie.setPosterPath(fileName);
+        Movie movieSaved = movieService.createMovie(movie).get();
+        String uploadDir = "src/main/resources/static/images/";
+        FileUploadUtil.saveFile(uploadDir, fileName, file);
+
+        return "redirect:/movies/movies";
     }
 
     @RequestMapping("/movieDetails")

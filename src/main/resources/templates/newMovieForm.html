@@ -9,76 +9,77 @@
     <title>Movie streamer - new movie form</title>
 </head>
 <body>
-    <form action="/movies/createMovie" method="post" class="w3-container w3-card-4 w3-light-grey w3-text-dark-gray w3-margin">
+    <form class="w3-container w3-card-4 w3-light-grey w3-text-dark-gray w3-margin" th:action="@{/movies/createMovie}" th:object="${movie}" enctype="multipart/form-data" method="POST">
         <h2 class="w3-center">New Movie Form</h2>
 
         <div class="w3-row w3-section">
             <div class="w3-col" style="width:50px"><i class="w3-xxlarge fa-solid fa-film"></i></div>
             <div class="w3-rest">
-                <input class="w3-input w3-border" name="title" type="text" placeholder="Title">
+                <input class="w3-input w3-border" th:field="*{title}" type="text" placeholder="Title">
             </div>
         </div>
 
         <div class="w3-row w3-section">
             <div class="w3-col" style="width:50px"><i class="w3-xxlarge fa-solid fa-calendar"></i></div>
             <div class="w3-rest">
-                <input class="w3-input w3-border" name="releaseYear" type="text" placeholder="Release year">
+                <input class="w3-input w3-border" th:field="*{releaseYear}" type="number" placeholder="Release year">
             </div>
         </div>
 
         <div class="w3-row w3-section">
             <div class="w3-col" style="width:50px"><i class="w3-xxlarge fa-solid fa-clock"></i></div>
             <div class="w3-rest">
-                <input class="w3-input w3-border" name="duration" type="text" placeholder="Duration (in minutes)">
+                <input class="w3-input w3-border" th:field="*{duration}" type="number" placeholder="Duration (in minutes)">
             </div>
         </div>
 
         <div class="w3-row w3-section">
             <div class="w3-col" style="width:50px"><i class="w3-xxlarge fa-solid fa-clapperboard"></i></div>
             <div class="w3-rest">
-                <input class="w3-input w3-border" name="directing" type="text" placeholder="Direction">
+                <input class="w3-input w3-border" th:field="*{directing}" type="text" placeholder="Direction">
             </div>
         </div>
 
         <div class="w3-row w3-section">
             <div class="w3-col" style="width:50px"><i class="w3-xxlarge fa-solid fa-people-group"></i></div>
             <div class="w3-rest">
-                <input class="w3-input w3-border" name="casting" type="text" placeholder="Casting">
+                <input class="w3-input w3-border" th:field="*{casting}" type="text" placeholder="Casting">
             </div>
         </div>
 
         <div class="w3-row w3-section">
             <div class="w3-col" style="width:50px"><i class="w3-xxlarge fa-solid fa-book-bookmark"></i></div>
             <div class="w3-rest">
-                <input class="w3-input w3-border" name="synopsis" type="text" placeholder="Synopsis">
+                <input class="w3-input w3-border" th:field="*{synopsis}" type="text" placeholder="Synopsis">
             </div>
         </div>
 
         <div class="w3-row w3-section">
             <div class="w3-col" style="width:50px"><i class="w3-xxlarge fa-solid fa-hat-cowboy"></i></div>
             <div class="w3-rest">
-                <input class="w3-input w3-border" name="genre" type="text" placeholder="Genre">
+                <input class="w3-input w3-border" th:field="*{genre}" type="text" placeholder="Genre">
             </div>
         </div>
 
         <div class="w3-row w3-section">
             <div class="w3-col" style="width:50px"><i class="w3-xxlarge fa-solid fa-face-smile"></i></div>
             <div class="w3-rest">
-                <input class="w3-input w3-border" name="ageRating" type="text" placeholder="Age rating">
+                <input class="w3-input w3-border" th:field="*{ageRating}" type="number" placeholder="Age rating">
             </div>
         </div>
 
         <div class="w3-row w3-section">
             <div class="w3-col" style="width:50px"><i class="w3-xxlarge fa-solid fa-image"></i></div>
             <div class="w3-rest">
-                <input class="w3-input w3-border" name="posterPath" type="text" placeholder="Poster image filename">
+                <input class="w3-file" id="parkImage" name="file" type="file">
+                <input class="w3-input w3-border" name="posterPath" type="hidden" value="default">
             </div>
         </div>
 
         <div class="w3-row w3-section">
             <div class="w3-col" style="width:50px"><i class="w3-xxlarge fa-solid fa-video"></i></div>
             <div class="w3-rest">
-                <input class="w3-input w3-border" name="videoPath" type="text" placeholder="Video filename">
+                <input class="w3-input w3-border" th:field="*{videoPath}" type="text" placeholder="Video filename">
             </div>
         </div>
 
