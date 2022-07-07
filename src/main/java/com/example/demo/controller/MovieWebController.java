@@ -32,25 +32,20 @@ public class MovieWebController {
 
     @RequestMapping("/newMovieForm")
     public String newMovieForm(Model containerToView) {
+        containerToView.addAttribute("movie", new Movie());
         return "newMovieForm";
     }
 
     @RequestMapping("/createMovie")
-    public String createMovie(Movie movie, Model containerToView, @RequestParam("image") MultipartFile image) throws IOException {
+    public String createMovie(Movie movie, MultipartFile file) throws IOException {
 
-        String fileName = StringUtils.cleanPath(image.getOriginalFilename());
+        String fileName = StringUtils.cleanPath(movie.getTitle() + file.getOriginalFilename());
         movie.setPosterPath(fileName);
-
-
         Movie movieSaved = movieService.createMovie(movie).get();
+        String uploadDir = "src/main/resources/static/images/";
+        FileUploadUtil.saveFile(uploadDir, fileName, file);
 
-        String uploadDir = "images/" + movieSaved.getTitle();
-
-        FileUploadUtil.saveFile(uploadDir, fileName, image);
-
-
-        movieService.createMovie(movie);
-        return "redirect:movies";
+        return "redirect:/movies/movies";
     }
 
     @RequestMapping("/movieDetails")
