@@ -1,20 +1,16 @@
 package com.example.demo.model;
 
 import lombok.*;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
-
 import java.io.Serializable;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-@Document("user")
+
 @Getter @Setter @ToString @EqualsAndHashCode @NoArgsConstructor @AllArgsConstructor
 public class User implements Serializable {
-    @Id
-    private String userUUID;
+
+    private UUID userUUID;
     private String userEmail;
     private String password;
     private String userRol;
@@ -34,7 +30,7 @@ public class User implements Serializable {
         this.birthDate = birthDate.toString();
     }
 
-    public User(String uuid, String userEmail, String password, String userRol,
+    public User(UUID uuid, String userEmail, String password, String userRol,
                 String userFirstName, String userLastName, String birthDate) {
         this.userUUID = uuid;
         this.userEmail = userEmail;
