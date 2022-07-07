@@ -14,7 +14,7 @@
 	<name>FilmStreamerCMS</name>
 	<description>Thymeleaf and REST client</description>
 	<properties>
-		<java.version>17</java.version>
+		<java.version>8</java.version>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -43,10 +43,10 @@
 			<scope>test</scope>
 		</dependency>
 
-		<dependency>
+		<!--<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-mongodb</artifactId>
-		</dependency>
+		</dependency> -->
 
 		<dependency>
 			<groupId>com.github.javafaker</groupId>

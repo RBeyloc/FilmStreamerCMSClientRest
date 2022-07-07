@@ -14,7 +14,7 @@ public class MovieService {
     RestTemplate restTemplate = new RestTemplate();
 
     public Optional<Iterable<Movie>> getAllMovies() {
-        ResponseEntity<List<Movie>> response = restTemplate.exchange("http://localhost:8083/api/movies/movies",
+        ResponseEntity<List<Movie>> response = restTemplate.exchange("https://filmstreamer.herokuapp.com/api/movies/movies",
                 HttpMethod.GET, null, new ParameterizedTypeReference<List<Movie>>() {
                 });
         List<Movie> movies = response.getBody();
@@ -22,7 +22,7 @@ public class MovieService {
     }
 
     public Optional<Movie> findMovieById(UUID movieUUID) {
-        ResponseEntity<Movie> response = restTemplate.exchange("http://localhost:8083/api/movies/getMovie/" + movieUUID,
+        ResponseEntity<Movie> response = restTemplate.exchange("https://filmstreamer.herokuapp.com/api/movies/getMovie/" + movieUUID,
                 HttpMethod.GET, null, new ParameterizedTypeReference<Movie>() {
                 });
         Movie movie = response.getBody();
@@ -30,7 +30,7 @@ public class MovieService {
     }
 
     public Optional<Movie> deleteMovieById(UUID movieUUID) {
-        ResponseEntity<Movie> response = restTemplate.exchange("http://localhost:8083/api/movies/deleteMovie/" + movieUUID,
+        ResponseEntity<Movie> response = restTemplate.exchange("https://filmstreamer.herokuapp.com/api/movies/deleteMovie/" + movieUUID,
                 HttpMethod.DELETE, null, new ParameterizedTypeReference<Movie>() {
                 });
         Movie movie = response.getBody();
@@ -38,7 +38,7 @@ public class MovieService {
     }
 
     public Optional<Movie> createMovie(Movie movie) {
-        String url = "http://localhost:8083/api/movies/createMovie";
+        String url = "https://filmstreamer.herokuapp.com/api/movies/createMovie";
         RestTemplate restTemplate = new RestTemplate();
 
         HttpHeaders headers = new HttpHeaders();
@@ -56,7 +56,7 @@ public class MovieService {
     public Optional<Movie> updateMovie(Movie movie) {
         Optional<Movie> movieFound = findMovieById(movie.getMovieUUID());
         if (movieFound.isPresent()) {
-            String url = "http://localhost:8083/api/movies/updateMovie";
+            String url = "https://filmstreamer.herokuapp.com/api/movies/updateMovie";
             RestTemplate restTemplate = new RestTemplate();
 
             HttpHeaders headers = new HttpHeaders();

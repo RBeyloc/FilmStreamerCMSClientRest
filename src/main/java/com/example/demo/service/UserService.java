@@ -14,7 +14,7 @@ public class UserService {
     RestTemplate restTemplate = new RestTemplate();
 
     public Optional<Iterable<User>> getAllUsers() {
-        ResponseEntity<List<User>> response = restTemplate.exchange("http://localhost:8083/api/users/users",
+        ResponseEntity<List<User>> response = restTemplate.exchange("https://filmstreamer.herokuapp.com/api/users/users",
                 HttpMethod.GET, null, new ParameterizedTypeReference<List<User>>() {
                 });
         List<User> users = response.getBody();
@@ -22,7 +22,7 @@ public class UserService {
     }
 
     public Optional<User> findUserById(UUID userUUID) {
-        ResponseEntity<User> response = restTemplate.exchange("http://localhost:8083/api/users/getUser/" + userUUID,
+        ResponseEntity<User> response = restTemplate.exchange("https://filmstreamer.herokuapp.com/api/users/getUser/" + userUUID,
                 HttpMethod.GET, null, new ParameterizedTypeReference<User>() {
                 });
         User user = response.getBody();
@@ -30,7 +30,7 @@ public class UserService {
     }
 
     public Optional<User> deleteUserById(UUID userUUID) {
-        ResponseEntity<User> response = restTemplate.exchange("http://localhost:8083/api/users/deleteUser/" + userUUID,
+        ResponseEntity<User> response = restTemplate.exchange("https://filmstreamer.herokuapp.com/api/users/deleteUser/" + userUUID,
                 HttpMethod.DELETE, null, new ParameterizedTypeReference<User>() {
                 });
         User user = response.getBody();
@@ -38,7 +38,7 @@ public class UserService {
     }
 
     public Optional<User> createUser(User user) {
-        String url = "http://localhost:8083/api/users/addUser";
+        String url = "https://filmstreamer.herokuapp.com/api/users/addUser";
         RestTemplate restTemplate = new RestTemplate();
 
         HttpHeaders headers = new HttpHeaders();
