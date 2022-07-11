@@ -39,7 +39,7 @@ public class MovieWebController {
     @RequestMapping("/createMovie")
     public String createMovie(Movie movie, MultipartFile file) throws IOException {
 
-        String fileName = StringUtils.cleanPath(movie.getTitle() + file.getOriginalFilename());
+        String fileName = StringUtils.cleanPath(file.getOriginalFilename());
         movie.setPosterPath(fileName);
         Movie movieSaved = movieService.createMovie(movie).get();
         String uploadDir = "src/main/resources/static/images/";
