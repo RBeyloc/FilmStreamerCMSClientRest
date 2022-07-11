@@ -1,14 +1,19 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <script src="https://kit.fontawesome.com/ed663e4c4c.js" crossorigin="anonymous"></script>
-    <title>Movie streamer - new movie form</title>
+    <title>Movie streamer - New movie form</title>
 </head>
-<body>
+
+<div layout:fragment="content">
+    <div class="w3-center">
+        <h3>New movie form</h3>
+    </div>
+
+    <div class="w3-row-padding w3-center w3-container w3-margin">
+
     <form class="w3-container w3-card-4 w3-light-grey w3-text-dark-gray w3-margin" th:action="@{/movies/createMovie}" th:object="${movie}" enctype="multipart/form-data" method="POST">
         <h2 class="w3-center">New Movie Form</h2>
 
@@ -87,5 +92,6 @@
         <a th:href="@{/movies/movies}" class="w3-button w3-red w3-margin">Cancel</a>
 
     </form>
-</body>
+    </div>
+</div>
 </html>

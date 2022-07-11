@@ -1,20 +1,19 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <script src="https://kit.fontawesome.com/ed663e4c4c.js" crossorigin="anonymous"></script>
-    <title>Movie streamer - movie details</title>
+    <title>Movie streamer - Movie details</title>
 </head>
-<body>
 
-<div class="w3-container w3-margin w3-padding">
+<div layout:fragment="content">
 
+    </br>
+    </br>
     <div class="w3-card-4 w3-mobile" style="width:70%; margin:auto">
         <header class="w3-container w3-light-grey">
-            <a th:href="@{/movies/movies}" class="w3-margin w3-button w3-dark-gray w3-right">Back to movies list</a>
+           <!--<a th:href="@{/movies/movies}" class="w3-margin w3-button w3-dark-gray w3-right">Back to movies list</a>-->
             <h2 th:text="${movie.title}"></h2>
             <h3 th:text="${movie.movieUUID}"></h3>
         </header>
@@ -40,11 +39,11 @@
             <br/>
             <hr/>
             <br/>
-            <!--<video controls="controls" poster="image" preload="true">
-                <source th:src="@{http://localhost:8083/api/videos/video/{path}(path=${movie.videoPath})}" type="video/mp4" >
-            </video>-->
+            <video controls="controls" poster="image" preload="true">
+                <source th:src="@{https://imagenes-film-streamer-heroku.s3.eu-west-3.amazonaws.com/video/{path}(path=${movie.videoPath})}" type="video/mp4" >
+            </video>
             <hr/>
-            <a th:href="@{/movies/movies}" class="w3-button w3-green">Back to movies list</a>
+           <!-- <a th:href="@{/movies/movies}" class="w3-button w3-green">Back to movies list</a>-->
         </div>
         <br/>
     </div>

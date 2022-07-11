@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <script src="https://kit.fontawesome.com/ed663e4c4c.js" crossorigin="anonymous"></script>
+    <title>Movie streamer - Users list</title>
+</head>
+<body>
+<nav class="w3-bar w3-border w3-black">
+    <a th:href="@{/movies/movies}" class="w3-bar-item w3-button w3-hover-none w3-text-grey w3-hover-text-white">Home</a>
+    <a th:href="@{/users/users}" class="w3-bar-item w3-button w3-hover-none w3-text-white w3-hover-text-white">Users</a>
+    <a th:href="@{/movies/movies}" class="w3-bar-item w3-button w3-hover-none w3-text-grey w3-hover-text-white">Movies</a>
+    <a th:href="@{/users/newUserForm}" class="w3-bar-item w3-button w3-hover-none w3-text-grey w3-hover-text-white w3-right">Add new user</a>
+</nav>
+
+<main class="w3-container w3-center" >
+
+    <section layout:fragment="content"></section>
+
+</main>
+
+<!-- The Modal -->
+<div id="id01" class="w3-modal">
+    <div class="w3-modal-content">
+        <div class="w3-container">
+            <span onclick="document.getElementById('id01').style.display='none'"
+                  class="w3-button w3-display-topright">&times;</span>
+            <p id="message"></p>
+            <button id="confirm" class="w3-button w3-green">Confirm</button>
+            <button id="deny" class="w3-button w3-red" onclick="document.getElementById('id01').style.display='none'; ">Close</button>
+            <br/><br/>
+        </div>
+    </div>
+</div>
+
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script src="/js/user.js"></script>
+</body>
+</html>
