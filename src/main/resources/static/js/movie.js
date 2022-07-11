@@ -11,11 +11,11 @@ function deleteMovieConfirmed(movieUUID) {
     .then(function (response) {
         document.getElementById('message').textContent = 'Action successfully done. Deleted film: ' + response.data.title + ', with UUID ' + response.data.movieUUID;
         document.getElementById('id01').style.display='block';
-        document.getElementById('confirm').onclick = function(){ document.getElementById('id01').style.display='none'; location.replace('https://filmstreamer.herokuapp.com//movies/movies');};
+        document.getElementById('confirm').onclick = function(){ document.getElementById('id01').style.display='none'; location.replace('movies');};
     })
     .catch(function (error) {
         document.getElementById('message').textContent = 'Object not found!';
         document.getElementById('id01').style.display='block';
-        document.getElementById('confirm').onclick = function(){ document.getElementById('id01').style.display='none'; location.replace('https://filmstreamer.herokuapp.com//movies/movies');};
+        document.getElementById('confirm').onclick = function(){ document.getElementById('id01').style.display='none'; location.replace('movies');};
     });
   }

@@ -11,11 +11,11 @@ function deleteUserConfirmed(userUUID) {
     .then(function (response) {
         document.getElementById('message').textContent = 'Action successfully done. Deleted user: ' + response.data.title + ', with UUID ' + response.data.userUUID;
         document.getElementById('id01').style.display='block';
-        document.getElementById('confirm').onclick = function(){ document.getElementById('id01').style.display='none'; location.replace('https://filmstreamer.herokuapp.com/users/users');};
+        document.getElementById('confirm').onclick = function(){ document.getElementById('id01').style.display='none'; location.replace('users');};
     })
     .catch(function (error) {
         document.getElementById('message').textContent = 'Object not found!';
         document.getElementById('id01').style.display='block';
-        document.getElementById('confirm').onclick = function(){ document.getElementById('id01').style.display='none'; location.replace('https://filmstreamer.herokuapp.com/users/users');};
+        document.getElementById('confirm').onclick = function(){ document.getElementById('id01').style.display='none'; location.replace('users');};
     });
   }
